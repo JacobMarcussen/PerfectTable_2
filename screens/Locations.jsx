@@ -56,29 +56,15 @@ const Locations = () => {
   }, []);
 
   return (
-    <ScrollView>
+    <ScrollView style={styles.wrapper}>
       <View style={styles.container}>
         <Text style={styles.headline}>
           Anbefalede <Text style={{ color: "#00BFFF" }}>lokationer</Text>
         </Text>
-        <View style={styles.cardContainer}>
-          {locations.map((location) => (
-            <TouchableOpacity
-              key={location.id}
-              onPress={() =>
-                navigation.navigate("LocationDetails", {
-                  name: location.name,
-                  cuisine: location.cuisine,
-                  address: location.address,
-                  postalcode: location.postalcode,
-                  city: location.city,
-                  type: location.type,
-                  priceclass: location.priceclass,
-                  image: "https://picsum.photos/500/500", // Placeholder image
-                })
-              }
-              style={styles.cardWrapper}
-            >
+
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <View style={styles.cardContainer}>
+            {locations.map((location) => (
               <RestaurantCard
                 name={location.name}
                 cuisine={location.cuisine}
@@ -91,9 +77,9 @@ const Locations = () => {
                 priceclass={location.priceclass}
                 waitlist={location.waitlist}
               />
-            </TouchableOpacity>
-          ))}
-        </View>
+            ))}
+          </View>
+        </ScrollView>
         <StatusBar style="auto" />
       </View>
 
@@ -101,39 +87,28 @@ const Locations = () => {
         <Text style={styles.headline}>
           Mulighed for <Text style={{ color: "#00BFFF" }}>venteliste</Text>
         </Text>
-        {locations
-          .filter((location) => location.waitlist)
-          .map((location) => (
-            <TouchableOpacity
-              key={location.id}
-              onPress={() =>
-                navigation.navigate("LocationDetails", {
-                  name: location.name,
-                  cuisine: location.cuisine,
-                  address: location.address,
-                  postalcode: location.postalcode,
-                  city: location.city,
-                  type: location.type,
-                  priceclass: location.priceclass,
-                  image: "https://picsum.photos/500/500",
-                })
-              }
-              style={styles.cardWrapper}
-            >
-              <RestaurantCard
-                name={location.name}
-                cuisine={location.cuisine}
-                image="https://picsum.photos/500/500"
-                rating="5"
-                address={location.address}
-                postalcode={location.postalcode}
-                city={location.city}
-                type={location.type}
-                priceclass={location.priceclass}
-                waitlist={location.waitlist}
-              />
-            </TouchableOpacity>
-          ))}
+
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <View style={styles.cardContainer}>
+            {locations
+              .filter((location) => location.waitlist)
+              .map((location) => (
+                <RestaurantCard
+                  key={location.id}
+                  name={location.name}
+                  cuisine={location.cuisine}
+                  image="https://picsum.photos/500/500"
+                  rating="5"
+                  address={location.address}
+                  postalcode={location.postalcode}
+                  city={location.city}
+                  type={location.type}
+                  priceclass={location.priceclass}
+                  waitlist={location.waitlist}
+                />
+              ))}
+          </View>
+        </ScrollView>
         <StatusBar style="auto" />
       </View>
     </ScrollView>
@@ -141,22 +116,25 @@ const Locations = () => {
 };
 
 const styles = StyleSheet.create({
+  wrapper: {
+    backgroundColor: "#242424",
+  },
   cardContainer: {
     width: "100%",
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: "start",
+    alignItems: "start",
     flexDirection: "row",
-    flexWrap: "wrap",
+    gap: 20,
+    marginLeft: 15,
   },
   container: {
     paddingTop: 85,
     alignItems: "center",
     justifyContent: "start",
     width: "100%",
-    backgroundColor: "#242424",
   },
   cardWrapper: {
-    width: "50%",
+    width: 250,
     paddingHorizontal: 15,
     paddingVertical: 10,
     paddingBottom: 20,

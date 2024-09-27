@@ -7,36 +7,14 @@ import { database } from "../firebase";
 // const addSampleLocations = () => {
 //   const locationData = [
 //     {
-//       id: "1",
-//       name: "Firebase Test Restaurant",
-//       address: "Bredgade 1",
-//       postalcode: "1260",
+//       id: "4",
+//       name: "Flammen",
+//       address: "H.C. Andersen Alle 1",
+//       postalcode: "1201",
 //       city: "København K",
 //       type: "Restaurant",
-//       cuisine: "Dansk",
+//       cuisine: "Steakhouse",
 //       priceclass: "Mellem",
-//       waitlist: true,
-//     },
-//     {
-//       id: "2",
-//       name: "Noma",
-//       address: "Refshalevej 96",
-//       postalcode: "1432",
-//       city: "København K",
-//       type: "Restaurant",
-//       cuisine: "Nordic",
-//       priceclass: "High",
-//       waitlist: false,
-//     },
-//     {
-//       id: "3",
-//       name: "Geranium",
-//       address: "Per Henrik Lings Allé 4",
-//       postalcode: "2100",
-//       city: "København Ø",
-//       type: "Restaurant",
-//       cuisine: "Fine Dining",
-//       priceclass: "High",
 //       waitlist: true,
 //     },
 //   ];
@@ -98,10 +76,10 @@ const Search = () => {
   };
 
   return (
-    <ScrollView>
+    <ScrollView style={styles.wrapper}>
       <View style={styles.container}>
         <Text style={styles.headline}>
-          Vælg en <Text style={{ color: "#FF4500" }}>by</Text>
+          Vælg en <Text style={{ color: "#00BFFF" }}>by</Text>
         </Text>
 
         {/* City Filter Buttons */}
@@ -138,16 +116,24 @@ const Search = () => {
           </Text>
         </TouchableOpacity>
 
-        {/* Filtered Results */}
-        {filterResults().map((location) => (
-          <RestaurantCard
-            key={location.id}
-            name={location.name}
-            cuisine={location.cuisine}
-            image="https://picsum.photos/500/500" // Placeholder image
-            rating="5" // Replace with actual rating if available
-          />
-        ))}
+        <View style={styles.cardContainer}>
+          {/* Filtered Results */}
+          {filterResults().map((location) => (
+            <RestaurantCard
+              key={location.id}
+              name={location.name}
+              cuisine={location.cuisine}
+              image="https://picsum.photos/500/500"
+              rating="5"
+              address={location.address}
+              postalcode={location.postalcode}
+              city={location.city}
+              type={location.type}
+              priceclass={location.priceclass}
+              waitlist={location.waitlist}
+            />
+          ))}
+        </View>
 
         <StatusBar style="auto" />
       </View>
@@ -156,13 +142,24 @@ const Search = () => {
 };
 
 const styles = StyleSheet.create({
+  cardContainer: {
+    width: "100%",
+    height: 200,
+    justifyContent: "start",
+    alignItems: "center",
+    flexDirection: "column",
+    gap: 20,
+    marginLeft: 15,
+  },
+  wrapper: {
+    backgroundColor: "#242424",
+  },
   container: {
     flex: 1,
     paddingTop: 85,
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
-    backgroundColor: "#fff",
   },
   headline: {
     fontSize: 28,
@@ -170,6 +167,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     width: "93%",
     marginBottom: 15,
+    color: "#fff",
   },
   buttonContainer: {
     flexDirection: "row",
@@ -184,7 +182,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   activeCityButton: {
-    backgroundColor: "#FF4500",
+    backgroundColor: "#00BFFF",
   },
   button: {
     width: "90%",
@@ -195,7 +193,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   activeButton: {
-    backgroundColor: "#FF4500",
+    backgroundColor: "#00BFFF",
   },
   buttonText: {
     color: "#fff",

@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity, Button } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
@@ -22,16 +22,31 @@ const LocationDetails = ({ route }) => {
         Address: {address}, {postalcode} {city}
       </Text>
       <Text style={styles.info}>Price Class: {priceclass}</Text>
+      <TouchableOpacity style={styles.bookButton} onPress={() => alert("Booking table...")}>
+        <Text style={styles.bookButtonText}>Book bord</Text>
+      </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  bookButton: {
+    backgroundColor: "#00BFFF",
+    padding: 18,
+    borderRadius: 5,
+    marginTop: 20,
+    alignItems: "center",
+  },
+  bookButtonText: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 18,
+  },
   container: {
     flex: 1,
     padding: 20,
     paddingTop: 130,
-    backgroundColor: "#fff",
+    backgroundColor: "#242424",
   },
   backButton: {
     width: 40,
@@ -55,10 +70,12 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 10,
+    color: "#fff",
   },
   info: {
     fontSize: 18,
     marginBottom: 10,
+    color: "#fff",
   },
 });
 

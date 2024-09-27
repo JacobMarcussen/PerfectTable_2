@@ -5,7 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Search from "./screens/Search";
 import Locations from "./screens/Locations";
-import LocationDetails from "./screens/LocationDetails"; // Screen for location details
+import LocationDetails from "./screens/LocationDetails";
 
 const Settings = () => {
   return <View />;

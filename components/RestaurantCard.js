@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, StyleSheet } from "react-native";
+import { View, Image, StyleSheet, TouchableOpacity } from "react-native";
 import RestaurantBadge from "./RestaurantBadge";
 import RestaurantInfo from "./RestaurantInfo";
 import RatingInfo from "./RatingInfo";
@@ -18,36 +18,47 @@ const RestaurantCard = ({
   waitlist,
 }) => {
   return (
-    <View style={styles.card}>
-      <Image source={{ uri: image }} style={styles.image} resizeMode="cover" />
-      <RestaurantBadge
-        text={waitlist ? "Venteliste tilgængelig" : "Ingen venteliste"}
-        color={waitlist ? "#00BFFF" : "#242424"}
-      />
-
-      <View style={styles.info}>
-        <RestaurantInfo
-          title={name}
-          description={`${address || ""}, ${postalcode || ""} ${city || ""}`}
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate("LocationDetails", {
+          name: location.name,
+          cuisine: location.cuisine,
+          address: location.address,
+          postalcode: location.postalcode,
+          city: location.city,
+          type: location.type,
+          priceclass: location.priceclass,
+          image: "https://picsum.photos/500/500",
+        })
+      }
+      style={styles.cardWrapper}
+    >
+      <View style={styles.card}>
+        <Image source={{ uri: image }} style={styles.image} resizeMode="cover" />
+        <RestaurantBadge
+          text={waitlist ? "Venteliste tilgængelig" : "Ingen venteliste"}
+          color={waitlist ? "#00BFFF" : "#242424"}
         />
-        <RatingInfo fee="5 kr." priceLevel={priceclass} rating={rating || "8.8"} />
-        <DeliveryInfo time={`${type || ""} • ${cuisine || ""}`} />
+
+        <View style={styles.info}>
+          <RestaurantInfo
+            title={name}
+            description={`${address || ""}, ${postalcode || ""} ${city || ""}`}
+          />
+          <RatingInfo fee="5 kr." priceLevel={priceclass} rating={rating || "8.8"} />
+          <DeliveryInfo time={`${type || ""} • ${cuisine || ""}`} />
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   card: {
     flex: 1,
-    backgroundColor: "#242424",
+    backgroundColor: "#323232",
     borderRadius: 10,
     width: "100%",
-    shadowColor: "#fff",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 8,
-    elevation: 5,
   },
   image: {
     width: "100%",
