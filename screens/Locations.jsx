@@ -66,6 +66,7 @@ const Locations = () => {
           <View style={styles.cardContainer}>
             {locations.map((location) => (
               <RestaurantCard
+                key={location.id}
                 name={location.name}
                 cuisine={location.cuisine}
                 image="https://picsum.photos/500/500" // Placeholder image
@@ -121,8 +122,8 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     width: "100%",
-    justifyContent: "start",
-    alignItems: "start",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
     flexDirection: "row",
     gap: 20,
     marginLeft: 15,

@@ -4,6 +4,7 @@ import RestaurantBadge from "./RestaurantBadge";
 import RestaurantInfo from "./RestaurantInfo";
 import RatingInfo from "./RatingInfo";
 import DeliveryInfo from "./DeliveryInfo";
+import { useNavigation } from "@react-navigation/native";
 
 const RestaurantCard = ({
   name,
@@ -17,17 +18,19 @@ const RestaurantCard = ({
   priceclass,
   waitlist,
 }) => {
+  const navigation = useNavigation();
+
   return (
     <TouchableOpacity
       onPress={() =>
         navigation.navigate("LocationDetails", {
-          name: location.name,
-          cuisine: location.cuisine,
-          address: location.address,
-          postalcode: location.postalcode,
-          city: location.city,
-          type: location.type,
-          priceclass: location.priceclass,
+          name: name,
+          cuisine: cuisine,
+          address: address,
+          postalcode: postalcode,
+          city: city,
+          type: type,
+          priceclass: priceclass,
           image: "https://picsum.photos/500/500",
         })
       }
